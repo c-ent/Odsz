@@ -1,7 +1,11 @@
 
 import { motion } from "framer-motion";
 
-export const Banner = ({begin}) => {
+type beginprops = {
+  begin: () => void; // replace with the actual function signature if it's not a void function
+};
+
+export const Banner = ({begin}: beginprops) => {
   return (
 <div className="flex flex-col h-[90vh] items-center text-center">
   <div className="mt-auto flex flex-col items-center justify-end">
