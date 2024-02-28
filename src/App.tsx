@@ -1,6 +1,6 @@
 import { AppProvider } from '@/providers/app';
 import { AppRoutes } from '@/routes';
-
+import './App.css';
 
 function App() {
 
@@ -8,6 +8,7 @@ function App() {
   return (
     <AppProvider>
     <AppRoutes />
+
     </AppProvider>
   )
 }

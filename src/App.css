@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+    body {
+        @apply font-sans;
+      }
+
+    h1 {
+      @apply text-7xl !important;
+      @apply font-medium !important;
+      /* @apply text-white; */
+    }
+    h2 {
+      @apply text-xl;
+    }
+    button{
+        @apply rounded-full !important;
+        @apply text-2xl !important;
+        @apply text-white !important;
+        @apply font-light !important;
+        @apply px-28 !important;
+        @apply py-2;
+        @apply bg-gradient-to-r from-[#fdfdfd39] to-[#ffffff1d] !important;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 300%;
+    -webkit-animation: animatedgradient 3s ease infinite alternate;
+    -moz-animation: animatedgradient 3s ease infinite alternate;
+    animation: animatedgradient 3s ease infinite alternate;
+  }
+  
+  @keyframes animatedgradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  /* @layer utilities {
+    .gradient-text {
+      @apply bg-gradient-to-r from-red to-blue;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  } */
+
+
+.bg-main {
+    background-image: url('public/images/bg-main.png');
+    background-size: cover;
+    background-position: 50% 25%;
+    background-repeat: no-repeat;
+  }
