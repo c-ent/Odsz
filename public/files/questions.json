@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "question": "When faced with a daunting challenge, what is your initial reaction?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I embrace the challenge, fueled by my dreams and aspirations."
+            },
+            {
+                "id": 2,
+                "choice": "I see challenges as opportunities to grow and find deeper meaning."
+            },
+            {
+                "id": 3,
+                "choice": "I tackle challenges with enthusiasm, to gain new wisdom to be knowledgeable and explore other things."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "question": "What motivates you to pursue your goals and aspirations?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I am driven by the desire to make a meaningful impact on the people I love and the society."
+            },
+            {
+                "id": 2,
+                "choice": "I am motivated by the quest for personal fulfillment and self-discovery ."
+            },
+            {
+                "id": 3,
+                "choice": "I am inspired by the thrill of pushing boundaries and experiencing new adventures."
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "question": "How do you envision your ideal future?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I see myself fulfilling my dreams and finding contentment."
+            },
+            {
+                "id": 2,
+                "choice": "I envision finding inner peace and fulfillment by discovering my true purpose."
+            },
+            {
+                "id": 3,
+                "choice": "I imagine a life filled with adventure, exploration, and continuous growth."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "question": "When reflecting on past experiences, what stands out the most?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I remember overcoming obstacles and achieving significant milestones."
+            },
+            {
+                "id": 2,
+                "choice": "I cherish moments of self-discovery and transformation."
+            },
+            {
+                "id": 3,
+                "choice": "I recall exciting adventures and memorable experiences."
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "question": "What do you value most in life?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I value ambition, determination, and the pursuit of excellence."
+            },
+            {
+                "id": 2,
+                "choice": "I value personal growth, self-esteem, and authenticity."
+            },
+            {
+                "id": 3,
+                "choice": "I value freedom, exploration, and embracing new experiences."
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "question": "How do you approach uncertainty and change?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I face uncertainty with resilience and determination."
+            },
+            {
+                "id": 2,
+                "choice": "I embrace change as a catalyst for self-discovery and growth."
+            },
+            {
+                "id": 3,
+                "choice": "I approach uncertainty with excitement and enthusiasm."
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "question": "What drives your curiosity and thirst for knowledge?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I am driven by the desire to acquire new skills and knowledge."
+            },
+            {
+                "id": 2,
+                "choice": "I seek deeper understanding and insight into the world and myself."
+            },
+            {
+                "id": 3,
+                "choice": "I am excited by discovering new perspectives and experiences."
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "question": "How do you approach setbacks and failures?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I tackle setbacks with determination and resilience."
+            },
+            {
+                "id": 2,
+                "choice": "I reflect on setbacks as opportunities for personal growth."
+            },
+            {
+                "id": 3,
+                "choice": "I embrace setbacks as part of life's journey and learning."
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "question": "What do you hope to achieve through your life's journey?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "I aspire to find fulfillment, recognition, and the realization of my dreams."
+            },
+            {
+                "id": 2,
+                "choice": "I seek my own pace, authenticity, and alignment with my personal goals."
+            },
+            {
+                "id": 3,
+                "choice": "I hope for adventure, exploration, and a meaningful life journey."
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "question": "How do you define fulfillment?",
+        "choices": [
+            {
+                "id": 1,
+                "choice": "Achieving contentment, living in alignment with my values, and embracing the journey of self-discovery."
+            },
+            {
+                "id": 2,
+                "choice": "Finding inner peace, experiencing new adventures, and continually expanding my horizons."
+            },
+            {
+                "id": 3,
+                "choice": "Living life to the fullest, seeking new challenges, and fostering personal growth."
+            }
+        ]
+    }
+]

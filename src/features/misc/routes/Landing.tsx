@@ -3,7 +3,7 @@ import { Head } from '@/components/Head';
 import { Banner } from '@/components/Banner';
 import { Form } from '@/components/Form';
 import { motion } from 'framer-motion';
-
+import { Navbar } from '@/components/Navbar';
 export const Landing = () => {
   const [showBanner, setShowBanner] = useState(true); 
   const [showForm, setShowForm] = useState(false); 
@@ -27,10 +27,12 @@ export const Landing = () => {
 
   return (
     // A div with a background image and full screen width
-    <div className="bg-main w-screen" >
-      <Head title="Landing" />
+    <div className=" w-screen" >
+      <Head title="ods" />
+     
 
       <div className="bg-black "className=""style={{height: '100vh', width: '100vw'}}>
+      <Navbar />
         {showBanner && <Banner  begin={handleClick} />}
       </div>
       

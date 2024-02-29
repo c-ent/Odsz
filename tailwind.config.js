@@ -9,7 +9,7 @@ export default {
   theme: {  
     extend: {
       fontFamily: {
-        'sans': ['Inter', 'sans-serif'],
+        'Inter': ['Inter', 'sans-serif'],
       },
       animation: {
         text: 'text 5s ease infinite',

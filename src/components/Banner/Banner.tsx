@@ -3,31 +3,37 @@ import { motion } from "framer-motion";
 
 export const Banner = ({begin}) => {
   return (
-      <div className="flex flex-col items-center justify-center w-screen text-center h-screen relative">
-<section>
-        <span></span>
-        <span></span>
+<div className="flex flex-col h-[90vh] items-center text-center">
+  <section>
+    <span></span>
+    <span></span>
+  </section>
 
-    </section>
-      
-        <h1
-          className="max-w-lg  mb-6 font-bold bg-gradient-to-b from-white via-[#b9b9b9c5] to-white text-transparent bg-clip-text animate-text"
-        >
-          unveil your character
-        </h1>
+  <div className="mt-auto flex flex-col items-center justify-end">
+    <motion.h1
+    className="max-w-lg mb-6 font-bold bg-gradient-to-b from-white via-[#b9b9b9c5] to-white text-transparent bg-clip-text animate-text"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1, y: ["0%", "5%", "0%"] }}
+    transition={{
+      opacity: { duration: 10, ease: "easeOut" },
+      y: { duration: 5, ease: "easeInOut", repeat: Infinity }
+    }}
+  >
+    unveil your character
+  </motion.h1>
+    <button onClick={begin}>
+      begin
+    </button>
+  </div>
 
-        
-        
-        <button onClick={begin}>
-          begin
-        </button>
-
-        
-        <p className="max-w-[200px] absolute justify-center bottom-10 flex flex-col items-center">
-          <div class="border-r h-[120px] border-white my-4"></div>
-          to realize ones destiny is a persons only obligation
-        </p>
-      </div>
+  <div className="mt-auto flex flex-col items-center mb-4">
+    <div className="border-r h-[60px] border-white my-4"></div>
+    <p className="font-extralight max-w-[600px]">
+    to realize ones destiny is a persons only obligation
+    </p>
+    
+  </div>
+</div>
   )
 }
 
