@@ -4,10 +4,13 @@ import { Banner } from '@/components/Banner';
 import { Form } from '@/components/Form';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
+
 export const Landing = () => {
-  const [showBanner, setShowBanner] = useState(true); 
   const [showForm, setShowForm] = useState(false); 
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  
   useEffect(() => {
     // Scroll to the top when the component mounts
     window.onbeforeunload = function () {
@@ -15,44 +18,31 @@ export const Landing = () => {
     }
   }, []);
 
-  const ref = useRef(null);
-  document.body.style.overflow = 'hidden';
-
   const handleClick = () => {
     ref.current?.scrollIntoView({behavior: 'smooth'});
-    setShowBanner(false);
     setShowForm(true); // Show the form when the button is clicked
-
   };
 
   return (
-    // A div with a background image and full screen width
-    <div className=" w-screen" >
-      <Head title="ods" />
-     
-
-      <div className="bg-black "className=""style={{height: '100vh', width: '100vw'}}>
-      <Navbar />
-        {showBanner && <Banner  begin={handleClick} />}
-      </div>
-      
+    <div className="w-screen star-section">
     
-      <div className='w-screen' ref={ref} style={{height: '100vh'}} >
-        
+            <span></span>
+            <span></span>
+    
+      <Head title="ods" />
+
+      <div className="h-screen w-screen">
+        <Navbar />
+    <Banner  begin={handleClick} />
+      </div>
+
+      <div className='w-screen h-screen' ref={ref}  >
         {showForm &&
-         <motion.div 
-         className='h-full p-10'
-         initial={{ scale: 0, opacity: 0 }} // Start from scale 0 and opacity 0
-         animate={{ scale:1, opacity: 1 }} // Animate to scale 1 and opacity 1
-         transition={{ repeat: 0, duration: 1, delay: 0  }} >
-
-          <Form />
-
+          <motion.div className='h-full p-3 md:p-10'>
+            <Form />
           </motion.div>
         }
       </div>
-   
-      
     </div>
   );
 };

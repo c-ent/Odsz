@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 
-@layer base {
     body {
         @apply font-Inter;
         display: absolute;
-        
+        overflow: hidden !important;
       }
+
+      
 
     h1 {
       @apply text-8xl !important;
@@ -16,13 +17,15 @@
       @apply text-white;
     }
     h2 {
-      @apply text-4xl !important;
+      @apply md:text-4xl !important;
+      @apply text-2xl;
       @apply text-white;
-      @apply font-extralight !important;
+      @apply font-normal !important;
     }
 
     h3 {
-      @apply text-xl !important;
+      @apply md:text-xl !important;
+      @apply text-sm ;
       @apply font-extralight !important;
       @apply text-white;
     }
@@ -65,18 +68,22 @@
         /* @apply text-white; */
       }
     }
-  }
 
 
-  
-  @keyframes animatedgradient {
-    0% {
-      background-position: 0% 50%;
+    .text-gradient-main {
+      background: linear-gradient(270deg, #ffffff,#fafafa, #0017459c, #d3d3d3a8, #fafafa, #ffffff);
+      background-size: 500% 500%;
+      animation: gradient 5s ease-in-out infinite;
     }
-    100% {
-      background-position: 100% 50%;
+    
+    @keyframes gradient {
+      0% {
+        background-position: 0% 0%;
+      }
+      100% {
+        background-position: 100% 100%;
+      }
     }
-  }
   /* @layer utilities {
     .gradient-text {
       @apply bg-gradient-to-r from-red to-blue;
@@ -94,9 +101,15 @@
 
   
 body {
-  background-image: url('public/images/bg-main.png') !important;
+  background-image: url('/images/bg-main.png') !important;
   background-size: cover;
   background-repeat: no-repeat;
+
+}
+
+.star-section{
+  overflow: hidden;
+  position: relative;
 }
 
   span{
@@ -108,6 +121,7 @@ body {
     background: #fff;
     border-radius: 50%;
     animation:  animate 3s linear infinite;
+    
 }
 span::before{
     content: '';
@@ -119,16 +133,7 @@ span::before{
     background: linear-gradient(90deg, #fff, transparent);
 }
 
-@keyframes pop-up {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+
 
 @keyframes animate {
     0%
@@ -152,18 +157,18 @@ span::before{
 span:nth-child(1){
     top: 0;
     right: 80%;
-    left:initial;
+    left:initial;                                                         
     animation-delay:0 ;
     animation-duration: 4s;
-}
+  }
 
-span:nth-child(2){
-    top: 0;
-    right: -20%;
-    left:initial;
-    animation-delay:5s;
-    animation-duration: 4s;
-}
+  span:nth-child(2){
+      top: 0;
+      right: 20%;
+      left:initial;
+      animation-delay:5s;
+      animation-duration: 4s;
+  }
 
 
 

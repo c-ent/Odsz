@@ -3,7 +3,16 @@ import DreamChaserSvg from '../../../../public/svg/DreamChaserSvg.svg';
 import RiskTakerSvg from '../../../../public/svg/RiskTakerSvg.svg';
 import SteadySailerSvg from '../../../../public/svg/SteadySailerSvg.svg';
 
-const categoryData = {
+
+type CategoryData = {
+  [key: string]: {
+    title: string;
+    description: string;
+    file: string;
+  };
+};
+
+const categoryData:CategoryData = {
   'dream': {
     title: "Dream Chaser",
     description: `You pursue your deepest aspirations, driven by the vision of what you want to achieve in life. Whether it's a career goal, a creative endeavor, or a personal ambition, you relentlessly strive to turn your dreams into reality.`,
@@ -21,9 +30,16 @@ const categoryData = {
   },
 };
 
+
 export const Results = () => {
-  const { category } = useParams();
+  const { category } = useParams<{ category: string }>();
+  
+  if (!category) {
+    return <div>Oops</div>;
+  }
+
   const categoryInfo = categoryData[category];
+
 
   if (!categoryInfo) {
     return <div>Category not found</div>;
@@ -35,7 +51,7 @@ export const Results = () => {
     <div className='h-screen w-screen flex flex-col justify-center items-center text-center space-y-5'>
 
 
-       <div className="border-r h-[120px] border-white my-4"></div>
+      <div className="border-r h-[120px] border-white my-4"></div>
       <h2>you are a</h2>
       <h1 className='font-bold'>{title}</h1>
       <p className='max-w-xl '>{description}</p>

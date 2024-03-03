@@ -4,18 +4,14 @@ import { motion } from "framer-motion";
 export const Banner = ({begin}) => {
   return (
 <div className="flex flex-col h-[90vh] items-center text-center">
-  <section>
-    <span></span>
-    <span></span>
-  </section>
-
   <div className="mt-auto flex flex-col items-center justify-end">
     <motion.h1
-    className="max-w-lg mb-6 font-bold bg-gradient-to-b from-white via-[#b9b9b9c5] to-white text-transparent bg-clip-text animate-text"
+    // className="max-w-lg mb-6 font-bold bg-gradient-to-b from-white via-[#b9b9b9c5] to-white text-transparent bg-clip-text"
+    className="max-w-lg mb-6 font-bold text-gradient-main text-transparent bg-clip-text"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1, y: ["0%", "5%", "0%"] }}
     transition={{
-      opacity: { duration: 10, ease: "easeOut" },
+      opacity: { duration: 3, ease: "easeOut" },
       y: { duration: 5, ease: "easeInOut", repeat: Infinity }
     }}
   >

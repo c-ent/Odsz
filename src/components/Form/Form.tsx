@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import { motion } from 'framer-motion';
 import questionsorig from '../../../public/files/questions.json'; // Import the JSON data
 import { useNavigate } from 'react-router-dom';
 
-const choiceToCategory = {
+const choiceToCategory: { [key: number]: string } = {
   1: "dream",
   2: "soul",
   3: "adventure",
-  // Add more mappings as needed
 };
 
 // Function to shuffle an array
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+function shuffle(array:object[]) {
+  let currentIndex = array.length, temporaryValue, randomIndex;
   
   // While there remain elements to shuffle...
   while (0 !== currentIndex) {
@@ -30,25 +29,44 @@ function shuffle(array) {
   return array;
 }
 
-const questions = shuffle(questionsorig); // Shuffle the questions
+interface Question{
+  id: number;
+  question: string;
+  choices: Choice[]; // Replace 'any' with the type of the choices if known
+}
+
+interface Choice {
+  id: number;
+  choice: string;
+}
+
+const questions = shuffle(questionsorig) as Question[]; // Shuffle the questions
 
 export const Form = () => {
+  
+
+  
   const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Start at the first question
-  const [selectedChoices, setSelectedChoices] = useState([]); // Store the selected choice IDs
-
-  const handleChoiceClick = (choiceId) => {
+  const [selectedChoices,setSelectedChoices] = useState<number[]>([]); // Store the selected choice IDs
+  const [selectedChoice, setSelectedChoice] = useState<null | number>(null);
+  
+  const handleChoiceClick = (choiceId:number) => {
+    setSelectedChoice(choiceId);
     setSelectedChoices(prevChoices => [...prevChoices, choiceId]); // Add the choice ID to the array
-    setCurrentQuestionIndex(prevIndex => prevIndex + 1); // Move to the next question
+    setTimeout(() => {
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setSelectedChoice(null); // Reset the selected choice when moving to the next question
+    }, 1000);
   };
   
   const currentQuestion = questions[currentQuestionIndex]; // Get the current question
 
- 
-  console.log(questions)
+
   if (currentQuestionIndex >= questions.length) {
     // All questions have been answered
-    const categoryCounts = selectedChoices.reduce((counts, choiceId) => {
+    const categoryCounts = selectedChoices.reduce<{ [key: string]: number }>((counts, choiceId) => {
+      console.log(choiceToCategory[choiceId]);
       const category = choiceToCategory[choiceId];
       return { ...counts, [category]: (counts[category] || 0) + 1 };
     }, {});
@@ -57,11 +75,27 @@ export const Form = () => {
 
     navigate(`/result/${maxCategory}`);
   }
+  
+  const variants = {
+    initial: { opacity: 0, scale: 1 },
+    animate: { opacity: 1, scale: 1 },
+    tap: { scale: 20 }, // Add a rotate property to the tap variant
+    out: { opacity: 0 } // Add an out variant for the exit animation
+  };
+  
+
+  
   return (
-    <div className='p-8 text-center flex flex-col  items-center bg-gradient-to-br from-[#fdfdfd07] to-[#ffffff0c] rounded-lg h-full backdrop-blur-[5px]'>
+    <motion.div className='p-4 md:p-8 shadow-sm shadow-white text-center flex flex-col  items-center bg-gradient-to-br from-[#fdfdfd00] to-[#ffffff05] rounded-2xl h-full backdrop-blur-[5px]'
+    animate={{  y: ["100%", "0%"] }}
+    transition={{
+      y: { duration: 2, ease: "easeInOut",  }
+    }}
+    >
+      
       
       <div 
-        className='flex flex-col gap-2'
+        className='flex flex-col gap-6'
        
       >
       <p>Question {currentQuestionIndex + 1} out of {questions.length}</p>
@@ -77,33 +111,40 @@ export const Form = () => {
       </div>
 
 
-<div className='flex-1 flex flex-col justify-center items-center gap-20'>
-    <div className='flex flex-row justify-between gap-20'>
+<div className='flex-1 flex flex-col justify-center items-center gap-10 max-w-7xl'>
+    <div className='flex flex-col md:flex-row justify-between gap-10 md:gap-20'>
     <motion.div 
           key={`motion-div-1-${currentQuestion.choices[0].choice}`}
-          className='flex cursor-pointer flex-1 gap-5'
+          className=' max-w-xl flex  items-center cursor-pointer flex-1 gap-5 hover:-translate-y-3 transform transition duration-500'
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate="animate"
+  variants={variants} // Add the variants
+  whileTap={{ scale: 10 }}
           transition={{
             opacity: { duration: 3, ease: "easeOut",delay:1 },
           }}
           onClick={() => handleChoiceClick(currentQuestion.choices[0].id)} // Add an onClick handler
+          style={{ visibility: selectedChoice === null || selectedChoice === currentQuestion.choices[0].id ? 'visible' : 'hidden' }}// Hide the choice if it's not the selected choice
         >
-          <p className='text-4xl'>
+        
+          <p className='text-4xl '>
             α
-          </p>
-          <h3>{currentQuestion.choices[0].choice}</h3>
+          </p> 
+          <h3 >{currentQuestion.choices[0].choice}</h3>
         </motion.div>
 
         <motion.div 
         key={`motion-div-2-${currentQuestion.choices[1].choice}`}
-          className='flex  cursor-pointer flex-1 gap-5'
+          className=' max-w-xl flex  items-center cursor-pointer flex-1 gap-5 hover:-translate-y-3 transform transition duration-500'
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate="animate"
+          variants={variants} // Add the variants
+          whileTap={{ scale: 10 }}
           transition={{
             opacity: { duration: 3, ease: "easeOut",delay:2 },
           }}
           onClick={() => handleChoiceClick(currentQuestion.choices[1].id)} // Add an onClick handler
+          style={{ visibility: selectedChoice === null || selectedChoice === currentQuestion.choices[1].id ? 'visible' : 'hidden' }} // Hide the choice if it's not the selected choice
         >
           <p className='text-4xl'>
           β
@@ -114,24 +155,29 @@ export const Form = () => {
 
       <div>
       <motion.div 
-      key={`motion-div-3-${currentQuestion.choices[2].choice}`}
-          className='flex cursor-pointer gap-5'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            opacity: { duration: 3, ease: "easeOut",delay:3 },
-          }}
-          onClick={() => handleChoiceClick(currentQuestion.choices[2].id)} // Add an onClick handler
-        >
-          <p className='text-4xl'>
-          γ
-          </p>
-          <h3>{currentQuestion.choices[2].choice}</h3>
-        </motion.div>
+  key={`motion-div-3-${currentQuestion.choices[2].choice}`}
+  className='max-w-xl flex items-center cursor-pointer flex-1 gap-5 hover:-translate-y-3 transform transition duration-500'
+  initial="initial"
+  animate="animate"
+  variants={variants} // Add the variants
+  whileTap={{ scale: 10 }}
+  transition={{
+    opacity: { duration: 3, ease: "easeOut", delay: 3 },
+    rotate: { duration: 0.5 } // Add a transition for the rotate animation
+  }}
+  onClick={() => handleChoiceClick(currentQuestion.choices[2].id)} // Add an onClick handler
+  style={{ visibility: selectedChoice === null || selectedChoice === currentQuestion.choices[2].id ? 'visible' : 'hidden' }}// Hide the choice if it's not the selected choice
+  
+>
+  <p className='text-4xl'>
+    γ
+  </p>
+  <h3>{currentQuestion.choices[2].choice}</h3>
+</motion.div>
       </div>
 </div>
 
-    </div>
+    </motion.div>
   )
 }
 
