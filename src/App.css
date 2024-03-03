@@ -69,9 +69,19 @@
       }
     }
 
+    .result-main-txt{
+      font-weight: 600 !important;
+    }
+
 
     .text-gradient-main {
       background: linear-gradient(270deg, #ffffff,#fafafa, #0017459c, #d3d3d3a8, #fafafa, #ffffff);
+      background-size: 500% 500%;
+      animation: gradient 5s ease-in-out infinite;
+    }
+
+    .text-gradient-result {
+      background: linear-gradient(270deg, #ffffff,#ffffff,#9f84ff, #02ffee9c, #1d0818a8, #9f84ff, #ffffff,#ffffff);
       background-size: 500% 500%;
       animation: gradient 5s ease-in-out infinite;
     }
@@ -84,6 +94,8 @@
         background-position: 100% 100%;
       }
     }
+
+    
   /* @layer utilities {
     .gradient-text {
       @apply bg-gradient-to-r from-red to-blue;

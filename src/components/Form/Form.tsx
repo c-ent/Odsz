@@ -2,6 +2,7 @@ import {  useState } from 'react'
 import { motion } from 'framer-motion';
 import questionsorig from '../../../public/files/questions.json'; // Import the JSON data
 import { useNavigate } from 'react-router-dom';
+// const fs = import('fs');
 
 const choiceToCategory: { [key: number]: string } = {
   1: "dream",
@@ -59,6 +60,7 @@ export const Form = () => {
       setSelectedChoice(null); // Reset the selected choice when moving to the next question
     }, 1000);
   };
+
   
   const currentQuestion = questions[currentQuestionIndex]; // Get the current question
 
@@ -70,9 +72,15 @@ export const Form = () => {
       const category = choiceToCategory[choiceId];
       return { ...counts, [category]: (counts[category] || 0) + 1 };
     }, {});
-
+  
     const maxCategory = Object.keys(categoryCounts).reduce((a, b) => categoryCounts[a] > categoryCounts[b] ? a : b);
-
+  
+    // // Save the result to a JSON file
+    // fs.writeFile('results.json', JSON.stringify(categoryCounts, null, 2), (err) => {
+    //   if (err) throw err;
+    //   console.log('Data written to file');
+    // });
+  
     navigate(`/result/${maxCategory}`);
   }
   

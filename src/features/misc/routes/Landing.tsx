@@ -9,7 +9,6 @@ export const Landing = () => {
   const [showForm, setShowForm] = useState(false); 
 
   const ref = useRef<HTMLDivElement>(null);
-
   
   useEffect(() => {
     // Scroll to the top when the component mounts
