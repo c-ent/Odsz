@@ -18,7 +18,7 @@
     }
     h2 {
       @apply md:text-4xl !important;
-      @apply text-3xl;
+      @apply text-3xl !important;
       @apply text-white;
       @apply font-normal !important;
     }
@@ -31,6 +31,7 @@
     }
 
     p{
+      @apply m-0 !important;
       @apply text-white;
       @apply text-lg;
       @apply font-extralight !important;

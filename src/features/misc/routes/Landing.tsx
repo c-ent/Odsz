@@ -35,9 +35,9 @@ export const Landing = () => {
     <Banner  begin={handleClick} />
       </div>
 
-      <div className='w-screen h-screen' ref={ref}  >
+      <div className=' w-screen h-screen' ref={ref}  >
         {showForm &&
-          <motion.div className='h-full p-3 md:p-10'>
+          <motion.div className='h-full p-3 pb-20 md:p-10'>
             <Form />
           </motion.div>
         }

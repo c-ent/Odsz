@@ -80,10 +80,10 @@ export const Results = () => {
 
   
   return (
-    <div className='p-5 h-screen w-screen flex flex-col justify-center items-center text-center space-y-5'>
+    <div className='p-5 h-screen w-screen flex flex-col justify-center items-center text-center space-y-8'>
 
 
-      <div className="border-r h-[100px] md:h-[120px] border-white my-4"></div>
+      <div className="border-r h-[70px] md:h-[120px] border-white my-4"></div>
       <h2>you're a</h2>
       {/* <h1 className='font-bold'></h1> */}
 
@@ -100,7 +100,7 @@ export const Results = () => {
    {title}
   </motion.h1>
  
-      <p className='max-w-xl text-sm md:text-md'>{description}</p>
+      <p className='max-w-xl text-sm md:text-md pt-5 '>{description}</p>
       <motion.img 
        initial={{ opacity: 0 }}
     animate={{ opacity: 1, y: ["0%", "5%", "0%"] }}
@@ -110,8 +110,9 @@ export const Results = () => {
     }}
       src={file} alt={title} 
       />
-      {percentage !== null && <p className='text-sm'>{percentage.toFixed(1)}% of users got the result {title}</p>}
-      <p className='max-w-md text-xs italic'> And, when you want something, all the universe conspires in helping you to achieve it.</p>
+      {percentage !== null && <p className='text-sm pt-5 '>{percentage.toFixed(1)}% of users got the result {title}</p>}
+
+      <p className='max-w-md text-xs italic m-0 pt-5  '> "And, when you want something, all the universe conspires in helping you to achieve it"</p>
       
     
     </div>

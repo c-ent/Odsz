@@ -130,7 +130,7 @@ export const Form = () => {
 
   
   return (
-    <motion.div className='p-4 md:p-8 shadow-sm shadow-white text-center flex flex-col  items-center bg-gradient-to-br from-[#fdfdfd00] to-[#ffffff05] rounded-2xl h-full backdrop-blur-[5px]'
+    <motion.div className='p-6 md:p-8 shadow-sm shadow-white text-center flex flex-col  items-center bg-gradient-to-br from-[#fdfdfd00] to-[#ffffff05] rounded-2xl h-full backdrop-blur-[5px]'
     animate={{  y: ["100%", "0%"] }}
     transition={{
       y: { duration: 2, ease: "easeInOut",  }
