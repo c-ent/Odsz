@@ -28,7 +28,7 @@ export const Banner = ({begin}: beginprops) => {
 
   <div className="mt-auto flex flex-col items-center mb-4">
     <div className="border-r h-[60px] border-white my-4"></div>
-    <p className="font-extralight max-w-[600px]">
+    <p className="italic font-extralight max-w-[600px]">
     to realize ones destiny is a persons only obligation
     </p>
     

@@ -3,6 +3,11 @@ import DreamChaserSvg from '../../../../public/svg/DreamChaserSvg.svg';
 import RiskTakerSvg from '../../../../public/svg/RiskTakerSvg.svg';
 import SteadySailerSvg from '../../../../public/svg/SteadySailerSvg.svg';
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
+const supabaseUrl = 'REMOVED'
+const supabaseKey = `REMOVED`
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 type CategoryData = {
   [key: string]: {
@@ -24,7 +29,7 @@ const categoryData:CategoryData = {
     file: RiskTakerSvg,
   },
   'adventure': {
-    title: "Adventurer",
+    title: "Voyager",
     description: `You fearlessly delve into the uncharted territories of life, seeking wisdom amidst the mysteries of the unknown. Every step you take is infused with curiosity and a thirst for knowledge, for you understand that true enlightenment lies in the depths of exploration.`,
     file: SteadySailerSvg,
   },
@@ -33,7 +38,30 @@ const categoryData:CategoryData = {
 
 export const Results = () => {
   const { category } = useParams<{ category: string }>();
-  
+  const [percentage, setPercentage] = useState<number | null>(null);
+
+  useEffect(() => {
+    const getResults = async () => {
+      const { data: categoriesData, error: categoriesError } = await supabase
+        .from('results')
+        .select('category, count');
+
+      if (categoriesError) {
+        console.error('Error fetching categories:', categoriesError);
+        return;
+      }
+
+      const totalCount = categoriesData.reduce((total, categoryData) => total + categoryData.count, 0);
+      const categoryCount = categoriesData.find(categoryData => categoryData.category === category)?.count || 0;
+      const categoryPercentage = (categoryCount / totalCount) * 100;
+
+      setPercentage(categoryPercentage);
+    };
+
+    getResults();
+  }, [category]);
+
+
   if (!category) {
     return <div>Oops</div>;
   }
@@ -47,30 +75,45 @@ export const Results = () => {
 
   const { title, description, file } = categoryInfo;
 
+  
+
+
+  
   return (
     <div className='p-5 h-screen w-screen flex flex-col justify-center items-center text-center space-y-5'>
 
 
       <div className="border-r h-[100px] md:h-[120px] border-white my-4"></div>
-      <h2>you are</h2>
+      <h2>you're a</h2>
       {/* <h1 className='font-bold'></h1> */}
 
       <motion.h1
     // className="max-w-lg mb-6 font-bold bg-gradient-to-b from-white via-[#b9b9b9c5] to-white text-transparent bg-clip-text"
     className="result-main-txt max-w-lg mb-6 font-bold text-gradient-result text-transparent bg-clip-text"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1, y: ["0%", "5%", "0%"] }}
-    transition={{
-      opacity: { duration: 3, ease: "easeOut" },
-      y: { duration: 5, ease: "easeInOut", repeat: Infinity }
-    }}
+    // initial={{ opacity: 0 }}
+    // animate={{ opacity: 1, y: ["0%", "1%", "0%"] }}
+    // transition={{
+    //   opacity: { duration: 3, ease: "easeOut" },
+    //   y: { duration: 2, ease: "easeInOut", repeat: Infinity }
+    // }}
   >
    {title}
   </motion.h1>
-
+ 
       <p className='max-w-xl text-sm md:text-md'>{description}</p>
-      <img src={file} alt={title} />
-      <p className='max-w-md text-xs'> And, when you want something, all the universe conspires in helping you to achieve it.</p>
+      <motion.img 
+       initial={{ opacity: 0 }}
+    animate={{ opacity: 1, y: ["0%", "5%", "0%"] }}
+    transition={{
+      opacity: { duration: 3, ease: "easeOut" },
+      y: { duration: 3, ease: "easeInOut", repeat: Infinity }
+    }}
+      src={file} alt={title} 
+      />
+      {percentage !== null && <p className='text-sm'>{percentage.toFixed(1)}% of users got the result {title}</p>}
+      <p className='max-w-md text-xs italic'> And, when you want something, all the universe conspires in helping you to achieve it.</p>
+      
+    
     </div>
   );
 }

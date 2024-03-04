@@ -18,7 +18,7 @@
     }
     h2 {
       @apply md:text-4xl !important;
-      @apply text-2xl;
+      @apply text-3xl;
       @apply text-white;
       @apply font-normal !important;
     }
@@ -81,7 +81,7 @@
     }
 
     .text-gradient-result {
-      background: linear-gradient(270deg, #ffffff,#ffffff,#9f84ff, #02ffee9c, #1d0818a8, #9f84ff, #ffffff,#ffffff);
+      background: linear-gradient(270deg, #ffffff,#ffffff,#87dfff, #02ffee9c, #feb4eda8, #87dfff, #ffffff,#ffffff);
       background-size: 500% 500%;
       animation: gradient 5s ease-in-out infinite;
     }

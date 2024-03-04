@@ -2,6 +2,11 @@ import {  useState } from 'react'
 import { motion } from 'framer-motion';
 import questionsorig from '../../../public/files/questions.json'; // Import the JSON data
 import { useNavigate } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'REMOVED'
+const supabaseKey = `REMOVED`
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 // const fs = import('fs');
 
 const choiceToCategory: { [key: number]: string } = {
@@ -46,7 +51,6 @@ const questions = shuffle(questionsorig) as Question[]; // Shuffle the questions
 export const Form = () => {
   
 
-  
   const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Start at the first question
   const [selectedChoices,setSelectedChoices] = useState<number[]>([]); // Store the selected choice IDs
@@ -80,7 +84,39 @@ export const Form = () => {
     //   if (err) throw err;
     //   console.log('Data written to file');
     // });
-  
+
+    const updateCategoryCount = async () => {
+      // Fetch the current count of the maxCategory from the database
+
+      
+      const { data: currentCountData, error: fetchError } = await supabase
+      .from('results')
+      .select('count')
+      .eq('category', maxCategory);
+
+      console.log(maxCategory,currentCountData, fetchError)
+      if (fetchError) {
+      console.error('Error fetching count:', fetchError);
+      return;
+      }
+
+      const currentCount = currentCountData[0]?.count || 0;
+
+      // Increment the count of the maxCategory in the database
+      const { error: updateError } = await supabase
+      .from('results')
+      .update({ count: currentCount + 1 })
+      .eq('category', maxCategory);
+
+      if (updateError) {
+      console.error('Error updating count:', updateError);
+      return;
+      }
+      
+      console.log('Category count updated', maxCategory, currentCount + 1)
+    }
+
+    updateCategoryCount()
     navigate(`/result/${maxCategory}`);
   }
   
