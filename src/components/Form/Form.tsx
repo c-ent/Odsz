@@ -72,7 +72,6 @@ export const Form = () => {
   if (currentQuestionIndex >= questions.length) {
     // All questions have been answered
     const categoryCounts = selectedChoices.reduce<{ [key: string]: number }>((counts, choiceId) => {
-      console.log(choiceToCategory[choiceId]);
       const category = choiceToCategory[choiceId];
       return { ...counts, [category]: (counts[category] || 0) + 1 };
     }, {});
@@ -93,8 +92,6 @@ export const Form = () => {
       .from('results')
       .select('count')
       .eq('category', maxCategory);
-
-      console.log(maxCategory,currentCountData, fetchError)
       if (fetchError) {
       console.error('Error fetching count:', fetchError);
       return;
@@ -113,13 +110,12 @@ export const Form = () => {
       return;
       }
       
-      console.log('Category count updated', maxCategory, currentCount + 1)
     }
 
     updateCategoryCount()
     navigate(`/result/${maxCategory}`);
   }
-  
+
   const variants = {
     initial: { opacity: 0, scale: 1 },
     animate: { opacity: 1, scale: 1 },
@@ -142,23 +138,29 @@ export const Form = () => {
         className='flex flex-col gap-6'
        
       >
-      <p>Question {currentQuestionIndex + 1} out of {questions.length}</p>
-        <motion.h2
-          key={`motion-h2-${currentQuestion.question}`}
-          className='max-w-5xl underline decoration-1 underline-offset-8'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: ["0%", "3%", "0%"] }}
-          transition={{
-            opacity: { duration: 5, ease: "easeOut" },
-          }}
-        >{currentQuestion.question}</motion.h2>
+        <p>Question {currentQuestionIndex + 1} out of {questions.length}</p>
+        {currentQuestion ? (
+          <motion.h2
+            key={`motion-h2-${currentQuestion.question}`}
+            className='max-w-5xl underline decoration-1 underline-offset-8'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, y: ["0%", "3%", "0%"] }}
+            transition={{
+              opacity: { duration: 5, ease: "easeOut" },
+            }}
+          >
+            {currentQuestion.question}
+          </motion.h2>
+        ) : (
+          <p>No question available</p>
+        )}
       </div>
 
 
 <div className='flex-1 flex flex-col justify-center items-center gap-10 max-w-7xl'>
     <div className='flex flex-col md:flex-row justify-between gap-10 md:gap-20'>
     <motion.div 
-          key={`motion-div-1-${currentQuestion.choices[0].choice}`}
+          key={`motion-div-1-${currentQuestion?.choices?.[0]?.choice ?? 'default'}`}
           className=' max-w-xl flex  items-center cursor-pointer flex-1 gap-5 hover:-translate-y-3 transform transition duration-500'
           initial={{ opacity: 0 }}
           animate="animate"
@@ -174,11 +176,11 @@ export const Form = () => {
           <p className='text-4xl '>
             α
           </p> 
-          <h3 >{currentQuestion.choices[0].choice}</h3>
+          <h3>{currentQuestion?.choices?.[0]?.choice ?? 'No choices available'}</h3>
         </motion.div>
 
         <motion.div 
-        key={`motion-div-2-${currentQuestion.choices[1].choice}`}
+          key={`motion-div-2-${currentQuestion?.choices?.[1]?.choice ?? 'default'}`}
           className=' max-w-xl flex  items-center cursor-pointer flex-1 gap-5 hover:-translate-y-3 transform transition duration-500'
           initial={{ opacity: 0 }}
           animate="animate"
@@ -193,13 +195,14 @@ export const Form = () => {
           <p className='text-4xl'>
           β
           </p>
-          <h3>{currentQuestion.choices[1].choice}</h3>
+          <h3>{currentQuestion?.choices?.[1]?.choice ?? 'No choices available'}</h3>
+
         </motion.div>
       </div>
 
       <div>
       <motion.div 
-  key={`motion-div-3-${currentQuestion.choices[2].choice}`}
+  key={`motion-div-3-${currentQuestion?.choices?.[2]?.choice ?? 'default'}`}
   className='max-w-xl flex items-center cursor-pointer flex-1 gap-5 hover:-translate-y-3 transform transition duration-500'
   initial="initial"
   animate="animate"
@@ -216,7 +219,8 @@ export const Form = () => {
   <p className='text-4xl'>
     γ
   </p>
-  <h3>{currentQuestion.choices[2].choice}</h3>
+  <h3>{currentQuestion?.choices?.[2]?.choice ?? 'No choices available'}</h3>
+
 </motion.div>
       </div>
 </div>
