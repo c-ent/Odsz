@@ -11,7 +11,6 @@ export const Landing = () => {
   const ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Scroll to the top when the component mounts
     window.onbeforeunload = function () {
       window.scrollTo(0, 0);
     }
@@ -19,7 +18,7 @@ export const Landing = () => {
 
   const handleClick = () => {
     ref.current?.scrollIntoView({behavior: 'smooth'});
-    setShowForm(true); // Show the form when the button is clicked
+    setShowForm(true);
   };
 
   return (

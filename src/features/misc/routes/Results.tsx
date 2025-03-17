@@ -52,7 +52,7 @@ export const Results = () => {
 
         if (categoriesError) {
           console.error('Error fetching categories:', categoriesError);
-          setPercentage(null); // No data available
+          setPercentage(null);
           return;
         }
 
@@ -63,7 +63,7 @@ export const Results = () => {
         setPercentage(categoryPercentage);
       } catch (e) {
         console.error('Unexpected error:', e);
-        setPercentage(null); // No data available
+        setPercentage(null);
       } finally {
         setLoading(false);
       }
@@ -117,7 +117,7 @@ export const Results = () => {
       {percentage !== null ? (
         <p className='text-sm pt-5 '>{percentage.toFixed(1)}% of users got the result {title}</p>
       ) : (
-           null
+          null
       )}
       
       <p className='max-w-md text-xs italic m-0 pt-5'> "And, when you want something, all the universe conspires in helping you to achieve it"</p>
