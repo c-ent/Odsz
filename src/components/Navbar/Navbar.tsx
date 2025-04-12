@@ -8,7 +8,7 @@ export const Navbar = () => {
         </div>
 
         <div>
-        <Link to="#" ><p className='text-2xl'>abt</p></Link>
+          {/* <Link to="#" ><p className='text-2xl'>abt</p></Link> */}
         </div>
         
     </div>
