@@ -21,17 +21,17 @@ type CategoryData = {
 const categoryData: CategoryData = {
   'dream': {
     title: "Dream Chaser",
-    description: `You pursue your deepest aspirations, driven by the vision of what you want to achieve in life. Whether it's a career goal, a creative endeavor, or a personal ambition, you relentlessly strive to turn your dreams into reality.`,
+    description: `You're driven by your goals and aspirations. You work steadily to make your dreams a reality, motivated by a clear vision of what you want to achieve.`,
     file: DreamChaserSvg,
   },
   'soul': {
     title: "Soul Searcher",
-    description: `You embrace change as the catalyst for growth and transformation on your quest to discover your personal legend. Through introspection and exploration, you unravel the layers of your being, unearthing the true essence of your existence.`,
+    description: `You value personal growth and self-discovery. You see change as an opportunity to learn about yourself and enjoy exploring different perspectives.`,
     file: RiskTakerSvg,
   },
   'adventure': {
     title: "Voyager",
-    description: `You fearlessly delve into the uncharted territories of life, seeking wisdom amidst the mysteries of the unknown. Every step you take is infused with curiosity and a thirst for knowledge, for you understand that true enlightenment lies in the depths of exploration.`,
+    description: `You're naturally curious and love exploring new ideas and experiences. You're drawn to discovery and aren't afraid to step outside your comfort zone.`,
     file: SteadySailerSvg,
   },
 };
@@ -40,7 +40,7 @@ export const Results = () => {
   const { category } = useParams<{ category: string }>();
   const [percentage, setPercentage] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
+  
   useEffect(() => {
     const getResults = async () => {
       setLoading(true);
@@ -93,8 +93,8 @@ export const Results = () => {
   }
 
   return (
-    <div className='p-5 h-screen w-screen flex flex-col justify-center items-center text-center space-y-8'>
-      <div className="border-r h-[70px] md:h-[70px] border-white my-4"></div>
+    <div className='px-4 h-screen w-screen flex flex-col justify-center items-center text-center space-y-2'>
+      <div className="border-r h-[40px] md:h-[50px] border-white"></div>
       <h2>you're a</h2>
 
       <motion.h1
@@ -112,6 +112,7 @@ export const Results = () => {
           y: { duration: 3, ease: "easeInOut", repeat: Infinity }
         }}
         src={file} alt={title} 
+        className="max-w-[130px] md:max-w-[400px] lg:max-w-[500px]"
       />
 
       {percentage !== null ? (
@@ -121,13 +122,13 @@ export const Results = () => {
       )}
       
       <p className='max-w-md text-xs italic m-0 pt-5'> "And, when you want something, all the universe conspires in helping you to achieve it"</p>
-        <Link to={`/`} className='mt-6 px-8 py-2 bg-gradient-to-r from-blue-500 to-blue-500 rounded-full text-white hover:scale-105 transition-all duration-300 flex items-center justify-center'>
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-            <polyline points="9 22 9 12 15 12 15 22" />
-          </svg>
-          Return Home
-        </Link>
+      <Link to={`/`} className='border-white/10 border mt-6 px-8 py-2 bg-gradient-to-r from-[#3771be4b] to-[#4d85ff50] rounded-full text-white hover:scale-105 transition-all duration-300 flex items-center justify-center'>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+          <polyline points="9 22 9 12 15 12 15 22" />
+        </svg>
+        Return Home
+      </Link>
     </div>
   );
 }

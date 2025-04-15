@@ -22,16 +22,15 @@ export const Landing = () => {
   };
 
   return (
-    <div className="w-screen star-section">
-    
-            <span></span>
-            <span></span>
+    <div className="w-screen flex flex-col justify-center star-section">
+      {/* Span tags as the comets */}
+      <span></span>
+      <span></span>
     
       <Head title="ods" />
-
       <div className="h-screen w-screen">
         <Navbar />
-    <Banner  begin={handleClick} />
+        <Banner  begin={handleClick} />
       </div>
 
       <div className=' w-screen h-screen' ref={ref}  >

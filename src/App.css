@@ -65,7 +65,7 @@
 
     @media (max-width: 600px) {
       h1 {
-        @apply text-6xl !important;
+        @apply text-5xl !important;
         /* @apply text-white; */
       }
     }

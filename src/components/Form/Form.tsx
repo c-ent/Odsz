@@ -1,7 +1,6 @@
 import {  useState } from 'react'
 import { motion } from 'framer-motion';
 import questionsorig from '../../../public/files/questions.json';
-import { useNavigate } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = 'REMOVED'
 const supabaseKey = `REMOVED`
@@ -44,7 +43,6 @@ interface Choice {
 const questions = shuffle(questionsorig) as Question[];
 
 export const Form = () => {
-  const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedChoices,setSelectedChoices] = useState<number[]>([]);
   const [selectedChoice, setSelectedChoice] = useState<null | number>(null);
@@ -95,7 +93,7 @@ export const Form = () => {
     }
 
     updateCategoryCount()
-    navigate(`/result/${maxCategory}`);
+    window.location.href = `/result/${maxCategory}`;
   }
 
   const variants = {
