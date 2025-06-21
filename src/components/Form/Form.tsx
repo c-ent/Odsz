@@ -144,12 +144,12 @@ export const Form = () => {
                 onClick={() => handleChoiceClick(currentQuestion.choices[0].id)}
                 style={{ visibility: selectedChoice === null || selectedChoice === currentQuestion.choices[0].id ? 'visible' : 'hidden' }}
               >
-                <p className='text-4xl'>
-                  α
-                </p> 
-                <h3>
-                  {currentQuestion?.choices?.[0]?.choice ?? 'No choices available'}
-                </h3>
+                  <p className='text-4xl'>
+                    α
+                  </p> 
+                  <h3>
+                    {currentQuestion?.choices?.[0]?.choice ?? 'No choices available'}
+                  </h3>
               </motion.div>
 
               <motion.div 
