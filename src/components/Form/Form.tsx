@@ -1,6 +1,6 @@
 import {  useState } from 'react'
 import { motion } from 'framer-motion';
-import questionsorig from '../../../public/files/questions.json';
+import questionsorig from '@/files/questions.json';
 import { createClient } from '@supabase/supabase-js'
 import { useNavigate } from 'react-router-dom';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL

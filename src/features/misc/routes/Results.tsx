@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
-import DreamChaserSvg from '../../../../public/svg/DreamChaserSvg.svg';
-import RiskTakerSvg from '../../../../public/svg/RiskTakerSvg.svg';
-import SteadySailerSvg from '../../../../public/svg/SteadySailerSvg.svg';
+import DreamChaserSvg from '@/svg/DreamChaserSvg.svg';
+import RiskTakerSvg from '@/svg/RiskTakerSvg.svg';
+import SteadySailerSvg from '@/svg/SteadySailerSvg.svg';
 import { motion } from 'framer-motion';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js'; 
