@@ -23,7 +23,7 @@ export const Landing = () => {
 
   return (
     <div className="w-screen flex flex-col justify-center star-section">
-      {/* Span tags as the comets */}
+      {/* Span tags are the comets */}
       <span></span>
       <span></span>
     
