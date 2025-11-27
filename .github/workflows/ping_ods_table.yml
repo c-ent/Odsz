@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '39 8 * * *' # Runs every day at 8:39 AM UTC
     - cron: '39 20 * * *' # Runs every day at 8:39 PM UTC
-  workflow_dispatch: # Manual trigger option
+  workflow_dispatch: # Manual trigger option 
 
 jobs:
   ping_supabase:
