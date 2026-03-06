@@ -1,10 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@reference "./index.css";
 
     body {
-        @apply font-Inter;
+        @apply font-inter;
         display: absolute;
         overflow: hidden !important;
       }
@@ -12,39 +9,39 @@
       
 
     h1 {
-      @apply text-8xl !important;
-      @apply font-normal !important;
+      @apply text-8xl!;
+      @apply font-normal!;
       @apply text-white;
     }
     h2 {
-      @apply md:text-4xl !important;
-      @apply text-3xl !important;
+      @apply md:text-4xl!;
+      @apply text-3xl!;
       @apply text-white;
-      @apply font-normal !important;
+      @apply font-normal!;
     }
 
     h3 {
-      @apply md:text-xl !important;
+      @apply md:text-xl!;
       @apply text-sm ;
-      @apply font-extralight !important;
+      @apply font-extralight!;
       @apply text-white;
     }
 
     p{
-      @apply m-0 !important;
+      @apply m-0!;
       @apply text-white;
       @apply text-lg;
-      @apply font-extralight !important;
+      @apply font-extralight!;
     }
     button {
       @apply relative overflow-hidden;
-      @apply rounded-full !important;
-      @apply text-2xl !important;
-      @apply text-white !important;
-      @apply font-light !important;
-      @apply px-28 !important;
-      @apply py-1 !important;
-      @apply bg-gradient-to-r from-[#fdfdfd89] to-[#ffffff31] !important;
+      @apply rounded-full!;
+      @apply text-2xl!;
+      @apply text-white!;
+      @apply font-light!;
+      @apply px-28!;
+      @apply py-1!;
+      @apply bg-linear-to-r! from-[#fdfdfd89] to-[#ffffff31];
     }
     
     button:before {
@@ -65,7 +62,7 @@
 
     @media (max-width: 600px) {
       h1 {
-        @apply text-5xl !important;
+        @apply text-5xl!;
         /* @apply text-white; */
       }
     }
@@ -79,6 +76,9 @@
       background: linear-gradient(270deg, #ffffff,#fafafa, #0017459c, #d3d3d3a8, #fafafa, #ffffff);
       background-size: 500% 500%;
       animation: gradient 5s ease-in-out infinite;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent !important;
     }
 
     .text-gradient-result {

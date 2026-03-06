@@ -7,10 +7,10 @@ type beginprops = {
 export const Banner = ({begin}: beginprops) => {
   return (
     <div className="flex flex-col justify-between items-center h-[80vh] w-full">
-      <div className="flex-grow flex items-center justify-center">
+      <div className="grow flex items-center justify-center">
         <div className="flex flex-col items-center text-center">
           <motion.h1
-            className="max-w-lg mb-6 font-bold text-gradient-main text-transparent bg-clip-text"
+            className="max-w-lg mb-6 font-bold text-gradient-main"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: ["0%", "5%", "0%"] }}
             transition={{
