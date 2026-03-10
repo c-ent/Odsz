@@ -1,25 +1,39 @@
-# cgr.dev/chainguard/node:latest-dev — zero CVE Node image by Chainguard.
-# "-dev" variant includes npm/shell needed for building.
-# The free tier only provides :latest (rebuilt + patched daily).
-FROM cgr.dev/chainguard/node:latest-dev AS builder
+# ---------- BUILD STAGE ----------
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci --ignore-scripts
+# Install dependencies
+COPY package*.json ./
+RUN npm ci
 
+# Copy source code
 COPY . .
-RUN npm run build
 
+# Build
+RUN --mount=type=secret,id=supabase_url \
+    --mount=type=secret,id=supabase_anon_key \
+    VITE_SUPABASE_URL=$(cat /run/secrets/supabase_url) \
+    VITE_SUPABASE_ANON_KEY=$(cat /run/secrets/supabase_anon_key) \
+    npm run build
 
-# cgr.dev/chainguard/nginx — zero CVE nginx, runs as non-root (uid 65532).
-# Rebuilt daily. Consistently scores 0 CVEs on Trivy/Snyk/Docker Scout.
-FROM cgr.dev/chainguard/nginx:latest AS runner
+# ---------- RUNTIME STAGE ----------
+FROM nginx:alpine-slim
 
-COPY --from=builder --chown=65532:65532 /app/dist /usr/share/nginx/html
-COPY --chown=65532:65532 nginx.conf /etc/nginx/conf.d/default.conf
+# Image metadata
+LABEL org.opencontainers.image.title="ODS"
+LABEL org.opencontainers.image.description="React application served with Nginx"
+LABEL org.opencontainers.image.version="1.0"
 
+# Copy the compiled React build from the builder stage
+# into the Nginx public directory
+COPY --from=builder /app/dist /usr/share/nginx/html
+# Replace default Nginx configuration
+# Usually used for SPA routing (React Router fallback to index.html)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 8080
 EXPOSE 8080
 
+# Start Nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
-

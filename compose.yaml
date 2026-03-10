@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      secrets:
+        - supabase_url
+        - supabase_anon_key
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+# compose reads VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY from your .env file automatically
+secrets:
+  supabase_url:
+    environment: VITE_SUPABASE_URL
+  supabase_anon_key:
+    environment: VITE_SUPABASE_ANON_KEY

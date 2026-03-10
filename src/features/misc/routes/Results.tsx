@@ -122,11 +122,11 @@ export const Results = () => {
         className="max-w-[130px] md:max-w-[400px] lg:max-w-[500px]"
       />
 
-      {percentage !== null ? (
-        <p className='text-sm pt-5 '>{percentage.toFixed(1)}% of users got the result {title}</p>
-      ) : (
-          null
-      )}
+      <p className='text-sm pt-5 '>
+        {percentage !== null ? `${percentage.toFixed(1)}% of users got the result ${title}` : '\u00A0'}
+      </p>
+
+
       
       <p className='max-w-md text-xs italic m-0 pt-5'> "And, when you want something, all the universe conspires in helping you to achieve it"</p>
       <Link to={`/`} className='border-white/10 border mt-6 px-8 py-2 bg-linear-to-r from-[#3771be4b] to-[#4d85ff50] rounded-full text-white hover:scale-105 transition-all duration-300 flex items-center justify-center'>

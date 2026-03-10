@@ -106,6 +106,28 @@ ods/
 
 **Voyager** - Naturally curious explorer who loves new ideas and experiences, unafraid to step outside the comfort zone.
 
+## Running with Docker
+
+### Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) installed and running
+
+### 1. Build and run
+
+```bash
+docker build -t ods .
+docker run -p 8080:8080 ods
+```
+
+or
+
+```bash
+docker compose up --build
+```
+
+Then open your browser at `http://localhost:8080`.
+
+---
+
 ## Deployment
 
 The app is configured for automatic deployment on Vercel from the main branch.
