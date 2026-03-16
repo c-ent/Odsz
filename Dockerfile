@@ -1,5 +1,7 @@
 # ---------- BUILD STAGE ----------
-FROM node:20-alpine AS builder
+FROM node:alpine AS builder 
+# Run update and upgrade to have the latest security patches
+RUN apk update && apk upgrade
 
 WORKDIR /app
 
@@ -11,15 +13,12 @@ RUN npm ci
 COPY . .
 
 # Build
-RUN --mount=type=secret,id=supabase_url \
-    --mount=type=secret,id=supabase_anon_key \
-    VITE_SUPABASE_URL=$(cat /run/secrets/supabase_url) \
-    VITE_SUPABASE_ANON_KEY=$(cat /run/secrets/supabase_anon_key) \
-    npm run build
+RUN npm run build
 
 # ---------- RUNTIME STAGE ----------
 FROM nginx:alpine-slim
-
+# Run update and upgrade to have the latest security patches
+RUN apk update && apk upgrade
 # Image metadata
 LABEL org.opencontainers.image.title="ODS"
 LABEL org.opencontainers.image.description="React application served with Nginx"

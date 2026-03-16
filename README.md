@@ -53,6 +53,8 @@ VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
+For Docker Compose, either create a `.env` file with the same values, or pass `.env.local` explicitly with `--env-file .env.local`.
+
 4. Set up Supabase Database:
 
 Create a table called `results` in your Supabase project:
@@ -112,6 +114,8 @@ ods/
 - [Docker](https://docs.docker.com/get-docker/) installed and running
 
 ### 1. Build and run
+
+Make sure `.env.local` exists in the project root before building.
 
 ```bash
 docker build -t ods .
