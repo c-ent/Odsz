@@ -15,7 +15,7 @@ COPY . .
 
 # Build
 RUN --mount=type=secret,id=env,required=true \
-	sh -ec 'set -a; . /run/secrets/env; set +a; npm run build'
+	sh -ec 'tr -d "\r" < /run/secrets/env > /tmp/build.env; set -a; . /tmp/build.env; set +a; npm run build'
 
 # ---------- RUNTIME STAGE ----------
 FROM nginx:alpine-slim
