@@ -44,16 +44,14 @@ npm install
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env.local
+cp .env.example .env
 ```
 
-Fill in your Supabase credentials in `.env.local`:
+Fill in your environment values in `.env`:
 ```env
 VITE_SUPABASE_URL=your_supabase_project_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
-
-For Docker Compose, either create a `.env` file with the same values, or pass `.env.local` explicitly with `--env-file .env.local`.
 
 4. Set up Supabase Database:
 
@@ -115,10 +113,15 @@ ods/
 
 ### 1. Build and run
 
-Make sure `.env.local` exists in the project root before building.
+Make sure your env file has the Vite variables before building:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
 ```bash
-docker build -t ods .
+docker build --secret id=env,src=.env -t ods .
 docker run -p 8080:8080 ods
 ```
 

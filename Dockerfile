@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.7
 # ---------- BUILD STAGE ----------
 FROM node:alpine AS builder 
 # Run update and upgrade to have the latest security patches
@@ -13,7 +14,8 @@ RUN npm ci
 COPY . .
 
 # Build
-RUN npm run build
+RUN --mount=type=secret,id=env,required=true \
+	sh -ec 'set -a; . /run/secrets/env; set +a; npm run build'
 
 # ---------- RUNTIME STAGE ----------
 FROM nginx:alpine-slim

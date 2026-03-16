@@ -3,6 +3,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      secrets:
+        - env
     ports:
       - "8080:8080"
     restart: unless-stopped
+
+secrets:
+  env:
+    file: .env
