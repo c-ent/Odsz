@@ -1,9 +1,5 @@
-// import { lazyImport } from '@/utils/lazyImport';
-
-
-import { Landing } from '@/features/misc/routes/Landing';
-import { Results } from '@/features/misc/routes/Results';
-// const { AuthRoutes } = lazyImport(() => import('@/features/auth'), 'AuthRoutes');
+import { Landing } from '@/features/quiz/routes/Landing';
+import { Results } from '@/features/quiz/routes/Results';
 
 export const publicRoutes = [
   {

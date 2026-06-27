@@ -1,12 +1,9 @@
-@reference "./index.css";
+    @reference "./index.css";
 
     body {
         @apply font-inter;
-        display: absolute;
         overflow: hidden !important;
       }
-
-      
 
     h1 {
       @apply text-8xl!;
@@ -27,13 +24,19 @@
       @apply text-white;
     }
 
+    button.quiz-choice span:last-child {
+      @apply text-[18px]!;
+      @apply font-extralight!;
+      @apply text-white;
+    }
+
     p{
       @apply m-0!;
       @apply text-white;
       @apply text-lg;
       @apply font-extralight!;
     }
-    button {
+    button:not(.quiz-choice) {
       @apply relative overflow-hidden;
       @apply rounded-full!;
       @apply text-2xl!;
@@ -43,8 +46,36 @@
       @apply py-1!;
       @apply bg-linear-to-r! from-[#fdfdfd89] to-[#ffffff31];
     }
+
+    button.quiz-choice {
+      @apply relative!;
+      @apply flex!;
+      @apply items-center!;
+      @apply rounded-none!;
+      @apply border-0!;
+      @apply bg-transparent!;
+      @apply px-0!;
+      @apply py-0!;
+      @apply m-0!;
+      @apply min-w-0!;
+      @apply w-auto!;
+      @apply text-left!;
+      @apply text-[18px]!;
+      @apply font-extralight!;
+      @apply overflow-visible!;
+      appearance: none;
+    }
+
+    button.quiz-choice:disabled {
+      opacity: 1;
+    }
+
+    button.quiz-choice:before {
+      content: none;
+      display: none;
+    }
     
-    button:before {
+    button:not(.quiz-choice):before {
       content: "";
       @apply absolute right-0 top-0 h-full w-6 rotate-6 bg-[#FFFFFFB3] opacity-10;
       animation: slide 2s infinite;
@@ -63,14 +94,12 @@
     @media (max-width: 600px) {
       h1 {
         @apply text-5xl!;
-        /* @apply text-white; */
       }
     }
 
     .result-main-txt{
       font-weight: 600 !important;
     }
-
 
     .text-gradient-main {
       background: linear-gradient(270deg, #ffffff,#fafafa, #0017459c, #d3d3d3a8, #fafafa, #ffffff);
@@ -81,12 +110,6 @@
       color: transparent !important;
     }
 
-    .text-gradient-result {
-      background: linear-gradient(270deg, #ffffff,#ffffff,#87dfff, #02ffee9c, #feb4eda8, #87dfff, #ffffff,#ffffff);
-      background-size: 500% 500%;
-      animation: gradient 5s ease-in-out infinite;
-    }
-    
     @keyframes gradient {
       0% {
         background-position: 0% 0%;
@@ -96,91 +119,75 @@
       }
     }
 
-    
-  /* @layer utilities {
-    .gradient-text {
-      @apply bg-gradient-to-r from-red to-blue;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  } */
-
-/* 
-.bg-main {
-    background-image: url('public/images/bg-main.png');
+  body {
+    background-image: url('/images/bg-main.png') !important;
     background-size: cover;
     background-repeat: no-repeat;
-  } */
-
-  
-body {
-  background-image: url('/images/bg-main.png') !important;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-}
-
-.star-section{
-  overflow: hidden;
-  position: relative;
-}
-
-  span{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border-radius: 50%;
-    animation:  animate 3s linear infinite;
-    
-}
-span::before{
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 300px;
-    height: 1px;
-    background: linear-gradient(90deg, #fff, transparent);
-}
-
-
-
-@keyframes animate {
-    0%
-    {
-        transform: rotate(315deg) translateX(0);
-        opacity: 1;
-    }
-    70%
-    {
-        opacity: 1;
-
-    }
-    100%
-    {
-        transform: rotate(315deg) translateX(-2500px);
-        opacity: 0;
-
-    }
-    
-}
-span:nth-child(1){
-    top: 0;
-    right: 80%;
-    left:initial;                                                         
-    animation-delay:0 ;
-    animation-duration: 4s;
   }
 
-  span:nth-child(2){
-      top: 0;
-      right: 20%;
-      left:initial;
-      animation-delay:5s;
-      animation-duration: 4s;
+  .star-section{
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+  }
+
+  .star-section > div:not(.comet-stage) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .comet-stage {
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    width: var(--comet-stage-width, 160vw);
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .comet-stage .comet {
+      position: absolute;
+      top: -10px;
+      left: var(--spawn-left, 50%);
+      right: initial;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0;
+      animation: comet-fly var(--duration, 3s) linear infinite backwards;
+      animation-delay: var(--delay, 0s);
+      z-index: 0;
+      pointer-events: none;
+  }
+
+  .comet-stage .comet::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: var(--tail-length, 300px);
+      height: 1px;
+      background: linear-gradient(90deg, #fff, transparent);
+      pointer-events: none;
+  }
+
+  @keyframes comet-fly {
+      0% {
+          transform: rotate(315deg) translateX(var(--entry-offset, 30vw));
+          opacity: 0;
+      }
+      6% {
+          opacity: 1;
+      }
+      75% {
+          opacity: 1;
+      }
+      100% {
+          transform: rotate(315deg) translateX(-2500px);
+          opacity: 0;
+      }
   }
 
 
