@@ -2,8 +2,7 @@ import * as React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import { HelmetProvider } from 'react-helmet-async';
-// import { ReactQueryDevtools } from 'react-query/devtools';
-// import { QueryClientProvider } from 'react-query';
+
 const ErrorFallback = () => {
   return (
     <div
@@ -27,19 +26,13 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     <React.Suspense
       fallback={
         <div className="flex items-center justify-center w-screen h-screen">
-          {/* <Spinner size="xl" /> */}
           <h1>Loading</h1>
         </div>
       }
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <HelmetProvider>
-          {/* <QueryClientProvider client={queryClient}> */}
-            {/* {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />} */}
-            {/* <AuthProvider> */}
-              <Router>{children}</Router>
-            {/* </AuthProvider> */}
-          {/* </QueryClientProvider> */}
+          <Router>{children}</Router>
         </HelmetProvider>
       </ErrorBoundary>
     </React.Suspense>

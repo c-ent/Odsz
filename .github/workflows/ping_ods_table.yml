@@ -1,3 +1,4 @@
+# This workflow is used to ping the Ods API daily to keep the table alive as supabase has a 30 day inactivity period
 name: Ping Ods API Daily
 
 on:
