@@ -17,6 +17,6 @@ export const logger = {
       details.error = toErrorMessage(options.error);
     }
 
-    console.error(`[ods] ${message}`, details);
+    console.error(`[odsz] ${message}`, details);
   },
 };

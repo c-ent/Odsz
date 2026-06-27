@@ -1,4 +1,4 @@
-# Ods 🌟
+# Odsz 🌟
 
 An interactive personality quiz application that helps you discover your character through thoughtful questions.
 
@@ -103,7 +103,7 @@ npm run dev
 ## Project Structure
 
 ```
-ods/
+odsz/
 ├── src/                   # Application source code
 │   ├── components/        # Reusable UI components
 │   ├── features/quiz/     # Quiz flow (landing, results)
@@ -175,8 +175,8 @@ VITE_TURNSTILE_SITE_KEY=your_turnstile_site_key
 ```
 
 ```bash
-docker build --secret id=env,src=.env -t ods .
-docker run -p 8080:8080 ods
+docker build --secret id=env,src=.env -t odsz .
+docker run -p 8080:8080 odsz
 ```
 
 or

@@ -20,7 +20,7 @@ export const Banner = ({ begin }: BeginProps) => {
           >
             unveil your character
           </motion.h1>
-          <button type="button" onClick={begin}>
+          <button type="button" className='cursor-pointer' onClick={begin}>
             begin
           </button>
         </div>

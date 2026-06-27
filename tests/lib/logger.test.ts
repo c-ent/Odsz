@@ -18,7 +18,7 @@ describe('logger', () => {
       context: { category: 'dream' },
     });
 
-    expect(console.error).toHaveBeenCalledWith('[ods] Something failed', {
+    expect(console.error).toHaveBeenCalledWith('[odsz] Something failed', {
       category: 'dream',
       error: 'boom',
     });

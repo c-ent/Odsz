@@ -16,7 +16,7 @@ RUN --mount=type=secret,id=env,required=true \
 FROM nginx:alpine-slim
 RUN apk update && apk upgrade
 
-LABEL org.opencontainers.image.title="ODS"
+LABEL org.opencontainers.image.title="ODSZ"
 LABEL org.opencontainers.image.description="React application served with Nginx"
 LABEL org.opencontainers.image.version="1.0"
 
