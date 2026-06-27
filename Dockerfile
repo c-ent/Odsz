@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1.7
-
 FROM node:alpine AS builder
 RUN apk update && apk upgrade
 
