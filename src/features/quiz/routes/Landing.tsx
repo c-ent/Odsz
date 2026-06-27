@@ -25,7 +25,7 @@ export const Landing = () => {
     <div className="w-screen flex flex-col justify-center star-section">
       <Comets />
 
-      <Head title="ods" />
+      <Head title="odsz" />
       <div className="w-screen h-dvh">
         <Navbar />
         <Banner begin={handleClick} />
