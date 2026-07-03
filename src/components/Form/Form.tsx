@@ -73,8 +73,8 @@ export const Form = () => {
         </motion.h2>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center items-center gap-10 max-w-7xl">
-        <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-20">
+      <div className="flex-1 flex flex-col justify-center items-center gap-6 sm:gap-10 max-w-7xl w-full">
+        <div className="flex flex-col md:flex-row justify-between gap-6 sm:gap-10 md:gap-20 w-full">
           {topChoices.map((choice, index) => (
             <Choice
               key={choice.id}
