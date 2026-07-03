@@ -6,7 +6,8 @@
       }
 
     h1 {
-      @apply text-8xl!;
+      @apply text-5xl!;
+      @apply md:text-8xl!;
       @apply font-normal!;
       @apply text-white;
     }
@@ -36,15 +37,32 @@
       @apply text-lg;
       @apply font-extralight!;
     }
-    button:not(.quiz-choice) {
+
+    button.btn-primary {
       @apply relative overflow-hidden;
       @apply rounded-full!;
-      @apply text-2xl!;
+      @apply text-lg!;
+      @apply md:text-xl!;
+      @apply lg:text-2xl!;
       @apply text-white!;
       @apply font-light!;
-      @apply px-28!;
-      @apply py-1!;
+      @apply px-8!;
+      @apply md:px-16!;
+      @apply lg:px-28!;
+      @apply py-2!;
+      @apply md:py-1!;
       @apply bg-linear-to-r! from-[#fdfdfd89] to-[#ffffff31];
+      @apply cursor-pointer;
+    }
+
+    .btn-secondary {
+      @apply inline-flex items-center justify-center;
+      @apply border border-white/10 px-6 py-2 md:px-8;
+      @apply bg-linear-to-r from-[#3771be4b] to-[#4d85ff50];
+      @apply rounded-full text-white text-base md:text-lg font-light;
+      @apply hover:scale-105 transition-all duration-300;
+      @apply no-underline;
+      @apply cursor-pointer;
     }
 
     button.quiz-choice {
@@ -75,11 +93,16 @@
       display: none;
     }
     
-    button:not(.quiz-choice):before {
+    button.btn-primary:before {
       content: "";
       @apply absolute right-0 top-0 h-full w-6 rotate-6 bg-[#FFFFFFB3] opacity-10;
       animation: slide 2s infinite;
       transform: translateX(3rem)  ;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      @apply outline-2 outline-offset-2 outline-white/60;
     }
     
     @keyframes slide {
@@ -88,12 +111,6 @@
       }
       100% {
         transform: translateX(-20rem)  skewX(-20deg);
-      }
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        @apply text-5xl!;
       }
     }
 
@@ -189,6 +206,3 @@
           opacity: 0;
       }
   }
-
-
-
