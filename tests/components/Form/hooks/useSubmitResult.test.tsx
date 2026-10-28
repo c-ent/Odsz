@@ -48,7 +48,7 @@ describe('useSubmitResult', () => {
     expect(mockNavigate).toHaveBeenCalledWith('/result/dream');
   });
 
-  it('exposes an error message when submit fails', async () => {
+  it('still navigates to the result page when saving fails', async () => {
     vi.mocked(incrementCategoryCount).mockResolvedValue({
       error: new Error('submit failed'),
     });
@@ -66,21 +66,11 @@ describe('useSubmitResult', () => {
       await result.current.submitWithToken('captcha-token');
     });
 
-    expect(result.current.submitError).toBe(
-      'Something went wrong while saving your result.',
-    );
-    expect(result.current.isSubmitting).toBe(false);
-    expect(mockNavigate).not.toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledWith('/result/soul');
   });
 
-  it('retries submission when retry is called and a new token is provided', async () => {
-    let allowSuccess = false;
-    vi.mocked(incrementCategoryCount).mockImplementation(async () => {
-      if (!allowSuccess) {
-        return { error: new Error('temporary failure') };
-      }
-      return { error: null };
-    });
+  it('still navigates to the result page when saving throws', async () => {
+    vi.mocked(incrementCategoryCount).mockRejectedValue(new Error('network down'));
 
     const { result } = renderHook(
       () =>
@@ -92,26 +82,10 @@ describe('useSubmitResult', () => {
     );
 
     await act(async () => {
-      await result.current.submitWithToken('first-token');
-    });
-
-    expect(result.current.submitError).toBe(
-      'Something went wrong while saving your result.',
-    );
-
-    allowSuccess = true;
-
-    act(() => {
-      result.current.retry();
-    });
-
-    await act(async () => {
-      await result.current.submitWithToken('second-token');
+      await result.current.submitWithToken('captcha-token');
     });
 
     expect(mockNavigate).toHaveBeenCalledWith('/result/adventure');
-    expect(result.current.submitError).toBeNull();
-    expect(vi.mocked(incrementCategoryCount).mock.calls.length).toBeGreaterThanOrEqual(2);
   });
 
   it('does not submit when the quiz is not complete', async () => {

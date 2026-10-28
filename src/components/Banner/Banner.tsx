@@ -10,7 +10,7 @@ export const Banner = ({ begin }: BeginProps) => {
       <div className="grow flex items-center justify-center">
         <div className="flex flex-col items-center text-center">
           <motion.h1
-            className="max-w-lg mb-6 font-bold text-gradient-main"
+            className="max-w-lg mb-6 text-gradient-main"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, y: ['0%', '5%', '0%'] }}
             transition={{
@@ -28,7 +28,7 @@ export const Banner = ({ begin }: BeginProps) => {
 
       <div className="flex flex-col items-center mb-4">
         <div className="border-r h-[60px] border-white my-4" />
-        <p className="italic text-center font-extralight p-5 md:p-0 md:max-w-[600px]">
+        <p className="italic text-center p-5 md:p-0 md:max-w-[600px]">
           to realize ones destiny is a persons only obligation
         </p>
       </div>

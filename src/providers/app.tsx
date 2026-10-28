@@ -6,10 +6,10 @@ import { HelmetProvider } from 'react-helmet-async';
 const ErrorFallback = () => {
   return (
     <div
-      className="text-red-500 w-screen h-screen flex flex-col justify-center items-center"
+      className="w-screen h-screen flex flex-col justify-center items-center"
       role="alert"
     >
-      <h2 className="text-lg font-semibold">Ooops, something went wrong :( </h2>
+      <h2>Ooops, something went wrong :( </h2>
       <button
         type="button"
         className="btn-secondary mt-4"

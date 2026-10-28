@@ -1,35 +1,14 @@
 import { Turnstile } from '@marsidev/react-turnstile';
 import { motion } from 'framer-motion';
-import { ErrorState } from '@/components/ErrorState';
 import { QuizCard } from './QuizCard';
 
 type LoadingStateProps = {
   isSubmitting: boolean;
-  submitError: string | null;
-  captchaKey: number;
-  onRetry: () => void;
   onCaptchaSuccess: (token: string) => void;
 };
 
-export const LoadingState = ({
-  isSubmitting,
-  submitError,
-  captchaKey,
-  onRetry,
-  onCaptchaSuccess,
-}: LoadingStateProps) => {
+export const LoadingState = ({ isSubmitting, onCaptchaSuccess }: LoadingStateProps) => {
   const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
-
-  if (submitError) {
-    return (
-      <QuizCard className="justify-center gap-8">
-        <ErrorState
-          message={submitError}
-          action={{ label: 'Try again', onClick: onRetry }}
-        />
-      </QuizCard>
-    );
-  }
 
   return (
     <QuizCard
@@ -59,7 +38,7 @@ export const LoadingState = ({
 
       <div className="flex flex-col items-center gap-4">
         <motion.p
-          className="text-gradient-main text-xl md:text-2xl tracking-wide"
+          className="text-gradient-main tracking-wide"
           animate={{ opacity: [0.75, 1, 0.75] }}
           transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         >
@@ -68,7 +47,6 @@ export const LoadingState = ({
 
         {!isSubmitting && siteKey && (
           <Turnstile
-            key={captchaKey}
             siteKey={siteKey}
             onSuccess={onCaptchaSuccess}
             options={{ theme: 'dark', size: 'normal' }}
@@ -76,7 +54,7 @@ export const LoadingState = ({
         )}
 
         {!isSubmitting && !siteKey && (
-          <p className="text-sm text-white/70">Turnstile site key is not configured.</p>
+          <p>Turnstile site key is not configured.</p>
         )}
 
         <div className="flex gap-2" aria-hidden="true">

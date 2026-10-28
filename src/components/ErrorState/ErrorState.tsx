@@ -6,7 +6,7 @@ type ErrorStateProps = {
 export const ErrorState = ({ message, action }: ErrorStateProps) => {
   return (
     <div className="flex flex-col items-center justify-center text-center gap-4 px-4">
-      <p className="text-gradient-main text-xl">{message}</p>
+      <p className="text-gradient-main">{message}</p>
       {action && (
         <button type="button" onClick={action.onClick} className="btn-secondary">
           {action.label}

@@ -38,7 +38,7 @@ describe('Results', () => {
     expect(view.getByRole('link', { name: 'Return Home' })).toHaveAttribute('href', '/');
   });
 
-  it('shows a stats error message when loading fails', async () => {
+  it('hides stats when loading fails', async () => {
     vi.mocked(getCategoryPercentage).mockResolvedValue({
       percentage: null,
       error: new Error('network error'),
@@ -49,8 +49,11 @@ describe('Results', () => {
     expect(view.getByText('Growth Seeker')).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(view.getByText('Unable to load stats right now.')).toBeInTheDocument();
+      expect(view.queryByText('Loading stats…')).not.toBeInTheDocument();
     });
+
+    expect(view.queryByText('Unable to load stats right now.')).not.toBeInTheDocument();
+    expect(view.queryByText(/of users got the result/)).not.toBeInTheDocument();
   });
 
   it('links back to the home page', async () => {

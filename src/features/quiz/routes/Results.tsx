@@ -32,7 +32,6 @@ const ReturnHomeLink = () => (
 export const Results = () => {
   const { category } = useParams<{ category: string }>();
   const [percentage, setPercentage] = useState<number | null>(null);
-  const [statsError, setStatsError] = useState(false);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
 
   useEffect(() => {
@@ -40,17 +39,9 @@ export const Results = () => {
 
     const loadStats = async () => {
       setIsLoadingStats(true);
-      setStatsError(false);
 
       const { percentage: result, error } = await getCategoryPercentage(category);
-
-      if (error) {
-        setStatsError(true);
-        setPercentage(null);
-      } else {
-        setPercentage(result);
-      }
-
+      setPercentage(error ? null : result);
       setIsLoadingStats(false);
     };
 
@@ -84,11 +75,11 @@ export const Results = () => {
         <div className="border-r h-[40px] md:h-[50px] border-white" />
         <h2>you&apos;re a</h2>
 
-        <motion.h1 className="result-main-txt mb-6 font-bold text-gradient-main">
+        <motion.h1 className="result-main-txt mb-6 text-gradient-main">
           {title}
         </motion.h1>
 
-        <p className="max-w-xl text-sm md:text-md pt-5">{description}</p>
+        <p className="max-w-xl pt-5">{description}</p>
         <motion.img
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: ['0%', '5%', '0%'] }}
@@ -101,17 +92,18 @@ export const Results = () => {
           className="max-w-[130px] md:max-w-[400px] lg:max-w-[500px]"
         />
 
-        <p className="text-sm pt-5">
-          {isLoadingStats && <span className="inline-block animate-pulse">Loading stats…</span>}
-          {!isLoadingStats && statsError && (
-            <span className="text-white/70">Unable to load stats right now.</span>
-          )}
-          {!isLoadingStats && !statsError && percentage !== null && (
-            <span>{percentage.toFixed(1)}% of users got the result {title}</span>
-          )}
-        </p>
+        {(isLoadingStats || percentage !== null) && (
+          <p className="pt-5">
+            {isLoadingStats && (
+              <span className="inline-block animate-pulse">Loading stats…</span>
+            )}
+            {!isLoadingStats && percentage !== null && (
+              <span>{percentage.toFixed(1)}% of users got the result {title}</span>
+            )}
+          </p>
+        )}
 
-        <p className="max-w-md text-xs italic m-0 pt-5">
+        <p className="max-w-md italic pt-5">
           &ldquo;And, when you want something, all the universe conspires in helping you to achieve it&rdquo;
         </p>
         <ReturnHomeLink />

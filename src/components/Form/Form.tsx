@@ -18,21 +18,14 @@ export const Form = () => {
     handleChoiceClick,
   } = useQuiz();
 
-  const { isSubmitting, submitError, retry, submitWithToken, captchaKey } =
-    useSubmitResult({
-      isComplete,
-      selectedChoices,
-    });
+  const { isSubmitting, submitWithToken } = useSubmitResult({
+    isComplete,
+    selectedChoices,
+  });
 
   if (isComplete) {
     return (
-      <LoadingState
-        isSubmitting={isSubmitting}
-        submitError={submitError}
-        captchaKey={captchaKey}
-        onRetry={retry}
-        onCaptchaSuccess={submitWithToken}
-      />
+      <LoadingState isSubmitting={isSubmitting} onCaptchaSuccess={submitWithToken} />
     );
   }
 

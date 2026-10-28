@@ -20,7 +20,6 @@ const mockQuestion = {
 
 describe('Form', () => {
   const handleChoiceClick = vi.fn();
-  const retry = vi.fn();
   const submitWithToken = vi.fn();
 
   beforeEach(() => {
@@ -28,10 +27,7 @@ describe('Form', () => {
 
     vi.mocked(useSubmitResult).mockReturnValue({
       isSubmitting: false,
-      submitError: null,
-      retry,
       submitWithToken,
-      captchaKey: 0,
     });
   });
 
@@ -109,10 +105,7 @@ describe('Form', () => {
 
     vi.mocked(useSubmitResult).mockReturnValue({
       isSubmitting: true,
-      submitError: null,
-      retry,
       submitWithToken,
-      captchaKey: 0,
     });
 
     const view = render(<Form />);
@@ -120,31 +113,4 @@ describe('Form', () => {
     expect(view.getByText('Calculating your results')).toBeInTheDocument();
   });
 
-  it('shows an error state with retry when submit fails', async () => {
-    const user = userEvent.setup();
-
-    vi.mocked(useQuiz).mockReturnValue({
-      questions: [mockQuestion],
-      currentQuestionIndex: 1,
-      currentQuestion: undefined,
-      selectedChoices: [1],
-      selectedChoice: null,
-      isComplete: true,
-      handleChoiceClick,
-    } as UseQuizResult);
-
-    vi.mocked(useSubmitResult).mockReturnValue({
-      isSubmitting: false,
-      submitError: 'Something went wrong while saving your result.',
-      retry,
-      submitWithToken,
-      captchaKey: 0,
-    });
-
-    const view = render(<Form />);
-
-    await user.click(view.getByRole('button', { name: 'Try again' }));
-
-    expect(retry).toHaveBeenCalledOnce();
-  });
 });
